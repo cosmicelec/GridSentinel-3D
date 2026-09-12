@@ -26,7 +26,10 @@ export default function Dashboard() {
   const [selectedNode, setSelectedNode] = useState<string | null>(null)
   const ws = useRef<WebSocket | null>(null)
 
+  const [mounted, setMounted] = useState(false)
+
   useEffect(() => {
+    setMounted(true)
     // Attempt WebSocket connection
     ws.current = new WebSocket('ws://localhost:8000/ws/telemetry')
     
@@ -98,6 +101,10 @@ export default function Dashboard() {
   }
 
   const selectedData = selectedNode ? telemetry[selectedNode] || [] : []
+
+  if (!mounted) {
+    return <div className="flex h-screen bg-gray-950 items-center justify-center text-gray-500">Loading Dashboard...</div>
+  }
 
   return (
     <div className="flex h-screen bg-gray-950 text-gray-100 overflow-hidden font-sans">
