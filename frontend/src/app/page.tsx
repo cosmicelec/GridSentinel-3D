@@ -1,6 +1,7 @@
 "use client"
 import React, { useEffect, useState, useRef } from 'react'
-import SubstationCanvas from '@/components/SubstationCanvas'
+import dynamic from 'next/dynamic'
+const SubstationCanvas = dynamic(() => import('@/components/SubstationCanvas'), { ssr: false })
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 import { AlertTriangle, Activity, Zap } from 'lucide-react'
 
