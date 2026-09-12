@@ -1,0 +1,22 @@
+# Python / Backend
+backend/__pycache__/
+backend/build/
+backend/dist/
+backend/backend.spec
+backend/*.db
+
+# Node / Frontend / Desktop
+node_modules/
+.next/
+out/
+desktop/node_modules/
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+desktop/src-tauri/target/
+desktop/src-tauri/bin/backend*.exe
+
+# OS / Misc
+.DS_Store
+Thumbs.db
+*.log
