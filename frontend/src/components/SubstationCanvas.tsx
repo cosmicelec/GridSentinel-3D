@@ -27,27 +27,29 @@ export default function SubstationCanvas({ alerts, onNodeClick }: SubstationCanv
   return (
     <div className="w-full h-full bg-gray-950">
       <Canvas camera={{ position: [0, 5, 15], fov: 50 }}>
-        <color attach="background" args={['#030712']} />
-        <ambientLight intensity={0.5} />
-        <pointLight position={[10, 10, 10]} intensity={1} />
-        
-        <Grid args={[20, 20]} cellColor="#1f2937" sectionColor="#374151" fadeDistance={30} />
-        
-        {NODES.map(node => (
-          <TransformerNode
-            key={node.id}
-            id={node.id}
-            position={node.position}
-            status={getStatus(node.id)}
-            onClick={onNodeClick}
-          />
-        ))}
+        <React.Suspense fallback={null}>
+          <color attach="background" args={['#030712']} />
+          <ambientLight intensity={0.5} />
+          <pointLight position={[10, 10, 10]} intensity={1} />
+          
+          <Grid args={[20, 20]} cellColor="#1f2937" sectionColor="#374151" fadeDistance={30} />
+          
+          {NODES.map(node => (
+            <TransformerNode
+              key={node.id}
+              id={node.id}
+              position={node.position}
+              status={getStatus(node.id)}
+              onClick={onNodeClick}
+            />
+          ))}
 
-        <TransmissionLine start={NODES[0].position} end={NODES[2].position} active={getStatus('TX-01') === 'normal'} />
-        <TransmissionLine start={NODES[1].position} end={NODES[2].position} active={getStatus('TX-02') === 'normal'} />
+          <TransmissionLine start={NODES[0].position} end={NODES[2].position} active={getStatus('TX-01') === 'normal'} />
+          <TransmissionLine start={NODES[1].position} end={NODES[2].position} active={getStatus('TX-02') === 'normal'} />
 
-        <OrbitControls makeDefault />
-        <Environment preset="city" />
+          <OrbitControls makeDefault />
+          <Environment preset="city" />
+        </React.Suspense>
       </Canvas>
     </div>
   )
